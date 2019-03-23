@@ -5,6 +5,8 @@
 #include <sys/socket.h>
 #include <arpa/inet.h>
 #include <netinet/in.h>
+#include <string.h>
+#include <strings.h>
 #include <fcntl.h>
 
 int main(int args, char* argv[])

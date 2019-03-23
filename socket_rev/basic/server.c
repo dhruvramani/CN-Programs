@@ -7,6 +7,8 @@
 #include <netinet/in.h>
 #include <math.h>
 #include <string.h>
+#include <strings.h>
+
 
 int main(int argc, char* argv[])
 {
