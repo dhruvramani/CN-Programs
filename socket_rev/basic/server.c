@@ -43,7 +43,7 @@ int main(int argc, char* argv[])
             //execvp(args[0], args);
             char buff[100];
             read(nsfd, buff, sizeof(buff));
-            printf("Server Read %s\n", sizeof(buff));
+            printf("Server Read %s\n", buff);
             strcpy(buff, "Hi!");
             write(nsfd, buff, sizeof(buff));
             //close(nsfd);
