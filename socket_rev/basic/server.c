@@ -23,10 +23,10 @@ int main(int argc, char* argv[])
 
     struct sockaddr_in cli;
     int size;
+    bzero(&cli, sizeof(cli));
+    int nsfd = accept(sfd, (struct sockaddr*) &cli, &size);
     while(1)
     {
-        bzero(&cli, sizeof(cli));
-        int nsfd = accept(sfd, (struct sockaddr*) &cli, &size);
         //pid_t p = fork();
         //if(p == 0)
         //{
@@ -42,11 +42,11 @@ int main(int argc, char* argv[])
             printf("Server Read %s\n", sizeof(buff));
             strcpy(buff, "Hi!");
             write(nsfd, buff, sizeof(buff));
-            close(nsfd);
+            //close(nsfd);
         /*} else {
             close(nsfd);
         }*/
-
+        sleep(1);
     }
 
 }
