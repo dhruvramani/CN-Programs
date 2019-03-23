@@ -15,20 +15,20 @@ int main(int argc, char* argv[])
     struct sockaddr_in ss;
     bzero(&ss, sizeof(ss));
     ss.sin_family = AF_INET;
-    ss.sin_addr.s_addr = htonl("127.0.0.1");
-    ss.sin_port = htons(8080);
+    ss.sin_addr.s_addr = inet_addr("127.0.0.1");
+    ss.sin_port = htons(5000);
 
     int ret = bind(sfd, (struct sockaddr*)& ss, sizeof(ss));
     if(ret == -1)
         return -1;
     listen(sfd, 50);
 
-    struct sockaddr_in cli;
-    int size;
-    bzero(&cli, sizeof(cli));
-    int nsfd = accept(sfd, (struct sockaddr*) &cli, &size);
     while(1)
     {
+        struct sockaddr_in cli;
+        int size;
+        bzero(&cli, sizeof(cli));
+        int nsfd = accept(sfd, (struct sockaddr*) &cli, &size);
         //pid_t p = fork();
         //if(p == 0)
         //{
@@ -48,7 +48,6 @@ int main(int argc, char* argv[])
         /*} else {
             close(nsfd);
         }*/
-        sleep(1);
     }
 
 }

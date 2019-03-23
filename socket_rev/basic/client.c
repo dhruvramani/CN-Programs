@@ -13,12 +13,10 @@ int main(int args, char* argv[])
     struct sockaddr_in server;
     bzero(&server, sizeof(server));
     server.sin_family = AF_INET;
-    server.sin_addr.s_addr = htonl("127.0.0.1");
-    server.sin_port = htons(8080);
-
+    server.sin_addr.s_addr = inet_addr("127.0.0.1");
+    server.sin_port = htons(5000);
     int ret = connect(sfd, (struct sockaddr*) &server, sizeof(server));
-    if(ret == -1)
-        return - 1;
+    printf("%d\n", ret);
 
     while(1)
     {
