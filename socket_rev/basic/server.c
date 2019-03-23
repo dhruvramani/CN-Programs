@@ -24,13 +24,12 @@ int main(int argc, char* argv[])
     if(ret == -1)
         return -1;
     listen(sfd, 50);
-
+    struct sockaddr_in cli;
+    int size;
+    bzero(&cli, sizeof(cli));
+    int nsfd = accept(sfd, (struct sockaddr*) &cli, &size);
     while(1)
     {
-        struct sockaddr_in cli;
-        int size;
-        bzero(&cli, sizeof(cli));
-        int nsfd = accept(sfd, (struct sockaddr*) &cli, &size);
         //pid_t p = fork();
         //if(p == 0)
         //{
