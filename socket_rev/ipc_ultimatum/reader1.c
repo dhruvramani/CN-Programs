@@ -33,7 +33,7 @@ struct msgbuffer
 
 int main()
 {
-    int fd = open("./nreader1.txt", O_RDWR);
+    int fd = open("./nreader1.txt", O_WRONLY);
     char pid[10];
     sprintf(pid, "%d", getpid());
     close(fd);
