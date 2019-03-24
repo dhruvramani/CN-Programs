@@ -71,7 +71,7 @@ int main()
             if(FD_ISSET(sfd2, &rset))
             {
                 struct sockaddr_in cli;
-                bsero(&cli, sizeof(cli));
+                bzero(&cli, sizeof(cli));
                 int size = sizeof(cli);
                 int nsfd = accept(sfd2, (struct sockaddr*)&cli, &size);
                 pid_t p = fork();
