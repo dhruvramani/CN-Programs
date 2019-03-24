@@ -7,6 +7,7 @@
 #include <sys/msg.h>
 #include <sys/socket.h>
 #include <arpa/inet.h>
+#include <signal.h>
 #include <netinet/in.h>
 
 int work = 1;

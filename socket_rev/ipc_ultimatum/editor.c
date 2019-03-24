@@ -9,6 +9,7 @@
 #include <arpa/inet.h>
 #include <netinet/in.h>
 #include <sys/msg.h>
+#include <signal.h>
 #include <string.h>
 
 int livecast = 0;
@@ -41,7 +42,7 @@ int main()
     tv.tv_sec = 0;
     tv.tv_usec = 0;
 
-    key_t k = ftok("progfile", 65);
+    key_t key = ftok("progfile", 65);
     int msgid = msgget(key, 0666 | IPC_CREAT);
 
     while(1)
