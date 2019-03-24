@@ -56,7 +56,7 @@ int main()
                 bzero(&cli, sizeof(cli));
                 int size = sizeof(cli);
 
-                int nsfd = accept(sfd, (struct sockaddr*)cli, &size);
+                int nsfd = accept(sfd, (struct sockaddr*)&cli, &size);
                 pid_t p = fork();
                 if(p == 0)
                 {
@@ -73,7 +73,7 @@ int main()
                 struct sockaddr_in cli;
                 bsero(&cli, sizeof(cli));
                 int size = sizeof(cli);
-                int nsfd = accept(sfd2, (struct sockaddr*)&cli, sizeof(cli));
+                int nsfd = accept(sfd2, (struct sockaddr*)&cli, &size);
                 pid_t p = fork();
                 if(p == 0)
                 {
