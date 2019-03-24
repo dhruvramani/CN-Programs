@@ -20,19 +20,26 @@ int main()
 
     int ret = bind(sfd, (struct sockaddr*)&server, sizeof(server));
     if(ret == -1)
+    {
+        printf("Bind1\n");
         return -1;
+    }
     listen(sfd, 50);
 
     // Socket 2
     int sfd2 = socket(AF_INET, SOCK_STREAM, 0);
     struct sockaddr_in server2;
+    bzero(&server2, sizeof(server2));
     server2.sin_family = AF_INET;
     server2.sin_addr.s_addr = inet_addr("127.0.0.1");
     server2.sin_port = htons(5001);
 
     ret = bind(sfd, (struct sockaddr*)&server2, sizeof(server2));
     if(ret == -1)
+    {
+        printf("Bind2\n");
         return -1;
+    }
 
     listen(sfd2, 50);
 
