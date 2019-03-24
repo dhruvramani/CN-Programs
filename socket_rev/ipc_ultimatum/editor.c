@@ -27,7 +27,7 @@ struct msgbuff
 
 int main()
 {
-    char fname = "./editorpid.txt", pido[10];
+    char fname[] = "./editorpid.txt", pido[10];
     int fd = open(fname, O_RDWR);
     sprintf(pido, "%d", getpid());
     write(fd, pido, sizeof(pido));

@@ -8,6 +8,7 @@
 #include <sys/socket.h>
 #include <arpa/inet.h>
 #include <signal.h>
+#include <string.h>
 #include <netinet/in.h>
 
 int work = 1;
