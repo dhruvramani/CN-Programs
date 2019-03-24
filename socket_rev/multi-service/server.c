@@ -34,7 +34,7 @@ int main()
     server2.sin_addr.s_addr = inet_addr("127.0.0.1");
     server2.sin_port = htons(5001);
 
-    ret = bind(sfd, (struct sockaddr*)&server2, sizeof(server2));
+    ret = bind(sfd2, (struct sockaddr*)&server2, sizeof(server2));
     if(ret == -1)
     {
         printf("Bind2\n");
