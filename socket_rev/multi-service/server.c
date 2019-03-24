@@ -6,7 +6,7 @@
 #include <sys/socket.h>
 #include <sys/select.h>
 #include <arpa/inet.h>
-#include <netinet.h>
+#include <netinet/in.h>
 
 int main()
 {
