@@ -9,6 +9,7 @@
 #include <sys/stat.h>
 #include <arpa/inet.h>
 #include <netinet/in.h>
+#include <string.h>
 
 int main()
 {

@@ -70,7 +70,7 @@ int main()
             {
                 char buff[100];
                 read(fd2, buff, sizeof(buff));
-                structt msgbuff msg;
+                struct msgbuff msg;
                 msg.type = alt;
                 strcpy(msg.text, buff);
                 msgsnd(msgid, &msg, sizeof(msg), 0);
