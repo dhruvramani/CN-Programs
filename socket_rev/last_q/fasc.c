@@ -68,11 +68,11 @@ int main()
     for(int i=1; i<n+1; i++)
     {
         int port;
-        char path[100];
+        char path[100] = (char*)malloc(100 * sizeof(char));
         printf("Enter Port\n");
         scanf("%d", &port);
         printf("Enter Path\n");
-        scanf("%s", path);
+        read(0, path, sizeof(path));
         
         int sfd = socket(AF_INET, SOCK_STREAM, 0);
         struct sockaddr_in addr;
