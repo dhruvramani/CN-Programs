@@ -51,13 +51,13 @@ int main()
     bzero(&info, sizeof(info));
     info.sin_family = AF_INET;
     info.sin_addr.s_addr = inet_addr("127.0.0.1");
-    info.sin_port = htons(5000);
+    info.sin_port = htons(5020);
     int ret = bind(connect_info, (struct sockaddr*)&info, sizeof(info));
     if(ret == -1)
         return -1;
     listen(connect_info, 50);
     init.sfd = connect_info;
-    init.port = 5000;
+    init.port = 5020;
     strcpy(init.path, " ");
     sfds[0] = init;
 
@@ -74,6 +74,9 @@ int main()
         printf("Enter Path\n");
         scanf("%s", path);
         
+        printf("Hi\n");
+        return;
+
         int sfd = socket(AF_INET, SOCK_STREAM, 0);
         struct sockaddr_in addr;
         bzero(&addr, sizeof(addr));
