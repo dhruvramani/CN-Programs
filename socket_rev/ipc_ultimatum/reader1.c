@@ -81,13 +81,10 @@ int main()
                 read(fd, pid, sizeof(pid));
                 int foo = atoi(pid);
                 kill((pid_t)foo, SIGUSR2);
-
-                while(1)
+                int n;
+                while((n = read(sfd, buffer, sizeof(buffer)) > 0)
                 {
                     char buffer[100];
-                    if(buffer[0] == '0')
-                        break;
-                    read(sfd, buffer, sizeof(buffer));
                     write(fifo, buffer, sizeof(buffer));
                 }
 
