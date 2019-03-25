@@ -99,7 +99,7 @@ int main()
         service.port = port;
         strcpy(service.path, path);
         sfds[i] = service;
-        printf("in loop")
+        printf("in loop");
     }
 
     fd_set rset;
