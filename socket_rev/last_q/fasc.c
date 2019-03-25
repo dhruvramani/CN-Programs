@@ -111,7 +111,7 @@ int main()
         for(int i=0; i<MAX + 1; i++)
             FD_SET(sfds[i].sfd, &rset);
 
-        if(select(FD_SETSIZE, &rest, NULL, NULL, &tv))
+        if(select(FD_SETSIZE, &rset, NULL, NULL, &tv))
         {
             for(int i=0; i<MAX + 1; i++)
                 if(FD_ISSET(sfds[i].sfd, &rset))
@@ -125,7 +125,7 @@ int main()
                         bzero(&servo, sizeof(servo));
                         servo.sin_family = AF_INET;
                         servo.sin_addr.s_addr = inet_addr("127.0.0.1");
-                        servo.sin_port = htons(sfds[port] + MAX + 1);
+                        servo.sin_port = htons(sfds[i].port + MAX + 1);
                         int roo = connect(sockfoo, (struct sockaddr*)&servo, sizeof(servo));
 
                         pthread_t t;
