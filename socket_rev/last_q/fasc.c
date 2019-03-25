@@ -92,15 +92,14 @@ int main()
             char *args[] = {path, ports, NULL};
             printf("%s executing\n", path);
             execvp(args[0], args);
-        } else if(p > 0)
-        {
+        } 
 
-            struct socks service;
-            service.sfd = sfd;
-            service.port = port;
-            strcpy(service.path, path);
-            sfds[i] = service;
-        }
+        struct socks service;
+        service.sfd = sfd;
+        service.port = port;
+        strcpy(service.path, path);
+        sfds[i] = service;
+        printf("in loop")
     }
 
     fd_set rset;
