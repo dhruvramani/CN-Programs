@@ -42,10 +42,10 @@ void* iofunc(void *argo)
 
 int main()
 {
-    struct socks sfds[MAX + 1];
+    struct socks *sfds[MAX + 1];
 
     // For the info one 
-    struct socks init; 
+    struct socks *init; 
     int connect_info = socket(AF_INET, SOCK_STREAM, 0);
     struct sockaddr_in info;
     bzero(&info, sizeof(info));
@@ -56,9 +56,9 @@ int main()
     if(ret == -1)
         return -1;
     listen(connect_info, 50);
-    init.sfd = connect_info;
-    init.port = 5020;
-    strcpy(init.path, " ");
+    init->sfd = connect_info;
+    init->port = 5020;
+    strcpy(init->path, " ");
     sfds[0] = init;
 
     int n;
@@ -94,10 +94,10 @@ int main()
             execvp(args[0], args);
         } 
 
-        struct socks service;
-        service.sfd = sfd;
-        service.port = port;
-        strcpy(service.path, path);
+        struct socks *service;
+        service->sfd = sfd;
+        service->port = port;
+        strcpy(service->path, path);
         sfds[i] = service;
         printf("in loop");
     }
@@ -108,21 +108,22 @@ int main()
     tv.tv_usec = 0;
 
     for(int i=0; i<n+1; i++)
-        printf("%d\n", sfds[i].port);
+        printf("%d\n", sfds[i]->port);
 
     while(1)
     {
         FD_ZERO(&rset);
         for(int i=0; i<n + 1; i++)
-            FD_SET(sfds[i].sfd, &rset);
+            FD_SET(sfds[i]->sfd, &rset);
 
         if(select(FD_SETSIZE, &rset, NULL, NULL, &tv))
         {
+            printf("Selected\n");
             for(int i=0; i<n + 1; i++)
-                if(FD_ISSET(sfds[i].sfd, &rset))
+                if(FD_ISSET(sfds[i]->sfd, &rset))
                 {
                     printf("%d accepted\n", i);
-                    int nsfd = accept(sfds[i].sfd, (struct sockaddr*)NULL, NULL);
+                    int nsfd = accept(sfds[i]->sfd, (struct sockaddr*)NULL, NULL);
                     if(i == 0)
                         write(nsfd, (void*)& sfds, sizeof(sfds)); // Send a pointer to the struct
                     else {
@@ -131,7 +132,7 @@ int main()
                         bzero(&servo, sizeof(servo));
                         servo.sin_family = AF_INET;
                         servo.sin_addr.s_addr = inet_addr("127.0.0.1");
-                        servo.sin_port = htons(sfds[i].port + MAX + 1);
+                        servo.sin_port = htons(sfds[i]->port + MAX + 1);
                         int roo = connect(sockfoo, (struct sockaddr*)&servo, sizeof(servo));
                         printf("Connected to service\n");
                         pthread_t t;
