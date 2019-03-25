@@ -63,14 +63,14 @@ int main()
 
     int n;
     printf("Enter number of services\n");
-    scanf("%d", n);
+    scanf("%d", &n);
 
     for(int i=1; i<n+1; i++)
     {
         int port;
         char path[100];
         printf("Enter Port\n");
-        scanf("%d", port);
+        scanf("%d", &port);
         printf("Enter Path\n");
         scanf("%s", path);
         
