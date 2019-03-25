@@ -32,6 +32,7 @@ void* iofunc(void *argo)
 
 int main(int argc, char* argv[])
 {
+
     int port = atoi(argv[1]);
     int sfd = socket(AF_INET, SOCK_STREAM, 0);
     struct sockaddr_in server;
@@ -43,7 +44,7 @@ int main(int argc, char* argv[])
     if(ret == -1)
         return -1;
     listen(sfd, 50);
-
+    printf("Service 1 is listening\n");
     while(1)
     {
         int nsfd = accept(sfd, (struct sockaddr*)NULL, NULL);
