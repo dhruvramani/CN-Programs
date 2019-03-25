@@ -68,7 +68,7 @@ int main()
     for(int i=1; i<n+1; i++)
     {
         int port;
-        char path[100] = (char*)malloc(100 * sizeof(char));
+        char path[100] = "";
         printf("Enter Port\n");
         scanf("%d", &port);
         printf("Enter Path\n");
