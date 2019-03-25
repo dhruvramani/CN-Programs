@@ -47,7 +47,7 @@ int main(int argc, char* argv[])
     while(1)
     {
         int nsfd = accept(sfd, (struct sockaddr*)NULL, NULL);
-        struct threadargs* args = (struct threadargs*) malloc(sizeof((struct threadargs)));
+        struct threadargs* args = (struct threadargs*) malloc(sizeof(struct threadargs));
         args->nsfd = nsfd;
         pthread_t t;
         pthread_create(&t, NULL, iofunc, (void*) args);
