@@ -73,9 +73,6 @@ int main()
         scanf("%d", &port);
         printf("Enter Path\n");
         scanf("%s", path);
-        
-        printf("Hi\n");
-        return;
 
         int sfd = socket(AF_INET, SOCK_STREAM, 0);
         struct sockaddr_in addr;
@@ -86,6 +83,9 @@ int main()
         int f = bind(sfd, (struct sockaddr*)&addr, sizeof(addr));
         listen(sfd, 50);
 
+        printf("Hi\n");
+        return;
+
         pid_t p = fork();
         
         if(p == 0)
@@ -94,7 +94,9 @@ int main()
             sprintf(ports, "%d", port + MAX + 1); // PORT + MAX + 1
             char *args[] = {path, ports, NULL};
             execvp(args[0], args);
-        }
+        } 
+
+
 
         struct socks service;
         service.sfd = sfd;
