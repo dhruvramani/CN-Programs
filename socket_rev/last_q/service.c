@@ -44,7 +44,7 @@ int main(int argc, char* argv[])
     if(ret == -1)
         return -1;
     listen(sfd, 50);
-    printf("Service 1 is listening\n");
+    printf("Service 1 is listening @ port %d\n", port);
     while(1)
     {
         int nsfd = accept(sfd, (struct sockaddr*)NULL, NULL);
