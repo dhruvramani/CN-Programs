@@ -12,6 +12,7 @@
 #include <signal.h>
 #include <arpa/inet.h>
 #include <netinet/in.h>
+#include <pthread.h>
 
 struct threadargs
 {
@@ -38,7 +39,7 @@ int main(int argc, char* argv[])
     server.sin_family = AF_INET;
     server.sin_addr.s_addr = inet_addr("127.0.0.1");
     server.sin_port = htons(port);
-    int ret = bind(sfd, (struct sockaddr*)server, sizeof(server));
+    int ret = bind(sfd, (struct sockaddr*)&server, sizeof(server));
     if(ret == -1)
         return -1;
     listen(sfd, 50);
