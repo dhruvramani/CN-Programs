@@ -108,6 +108,9 @@ int main()
     tv.tv_sec = 0;
     tv.tv_usec = 0;
 
+    for(int i=0; i<n+1; i++)
+        printf("%d\n", sfds[i].port);
+
     while(1)
     {
         FD_ZERO(&rset);
