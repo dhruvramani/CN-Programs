@@ -65,7 +65,7 @@ int main()
     printf("Enter number of services\n");
     scanf("%d", &n);
 
-    for(int i=1; i<n+1; i++)
+    for(int i=1; i < n+1; i++)
     {
         int port;
         char path[100] = "";
@@ -83,25 +83,22 @@ int main()
         int f = bind(sfd, (struct sockaddr*)&addr, sizeof(addr));
         listen(sfd, 50);
 
-        printf("Hi\n");
-        return;
-
         pid_t p = fork();
         
         if(p == 0)
         {
-            char ports[10];
+            char ports[10] = "";
             sprintf(ports, "%d", port + MAX + 1); // PORT + MAX + 1
             char *args[] = {path, ports, NULL};
             execvp(args[0], args);
         } 
 
-
-
         struct socks service;
         service.sfd = sfd;
         service.port = port;
         strcpy(service.path, path);
+        printf("Hi\n");
+        return;
         sfds[i] = service;
     }
 
