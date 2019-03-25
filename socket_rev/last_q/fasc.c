@@ -100,9 +100,6 @@ int main()
         sfds[i] = service;
     }
 
-    printf("Hi\n");
-    return;
-
     fd_set rset;
     struct timeval tv;
     tv.tv_sec = 0;
@@ -111,12 +108,12 @@ int main()
     while(1)
     {
         FD_ZERO(&rset);
-        for(int i=0; i<MAX + 1; i++)
+        for(int i=0; i<n + 1; i++)
             FD_SET(sfds[i].sfd, &rset);
 
         if(select(FD_SETSIZE, &rset, NULL, NULL, &tv))
         {
-            for(int i=0; i<MAX + 1; i++)
+            for(int i=0; i<n + 1; i++)
                 if(FD_ISSET(sfds[i].sfd, &rset))
                 {
                     int nsfd = accept(sfds[i].sfd, (struct sockaddr*)NULL, NULL);
