@@ -74,15 +74,20 @@ int main()
         printf("Enter Path\n");
         scanf("%s", path);
 
-        int sfd = socket(AF_INET, SOCK_STREAM, 0);
+        struct socks service;
+        service.port = port;
+        strcpy(service.path, path);
+        sfds[i].sfd = 0;
+        sfds[i] = service;
+
+        sfds[i].sfd = socket(AF_INET, SOCK_STREAM, 0);
         struct sockaddr_in addr;
         bzero(&addr, sizeof(addr));
         addr.sin_family = AF_INET;
         addr.sin_addr.s_addr = inet_addr("127.0.0.1");
         addr.sin_port = htons(port);
-        int f = bind(sfd, (struct sockaddr*)&addr, sizeof(addr));
-        listen(sfd, 50);
-
+        int f = bind(sfds[i].sfd, (struct sockaddr*)&addr, sizeof(addr));
+        listen(sfds[i].sfd, 50);
         pid_t p = fork();
         
         if(p == 0)
@@ -93,13 +98,6 @@ int main()
             printf("%s executing\n", path);
             execvp(args[0], args);
         } 
-
-        struct socks service;
-        service.sfd = sfd;
-        service.port = port;
-        strcpy(service.path, path);
-        sfds[i] = service;
-        printf("in loop");
     }
 
     fd_set rset;
