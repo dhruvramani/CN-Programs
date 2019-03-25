@@ -90,14 +90,17 @@ int main()
             char ports[10] = "";
             sprintf(ports, "%d", port + MAX + 1); // PORT + MAX + 1
             char *args[] = {path, ports, NULL};
+            printf("%s executing\n", path);
             execvp(args[0], args);
-        } 
+        } else if(p > 0)
+        {
 
-        struct socks service;
-        service.sfd = sfd;
-        service.port = port;
-        strcpy(service.path, path);
-        sfds[i] = service;
+            struct socks service;
+            service.sfd = sfd;
+            service.port = port;
+            strcpy(service.path, path);
+            sfds[i] = service;
+        }
     }
 
     fd_set rset;
@@ -116,6 +119,7 @@ int main()
             for(int i=0; i<n + 1; i++)
                 if(FD_ISSET(sfds[i].sfd, &rset))
                 {
+                    printf("%d accepted\n", i);
                     int nsfd = accept(sfds[i].sfd, (struct sockaddr*)NULL, NULL);
                     if(i == 0)
                         write(nsfd, (void*)& sfds, sizeof(sfds)); // Send a pointer to the struct
@@ -127,7 +131,7 @@ int main()
                         servo.sin_addr.s_addr = inet_addr("127.0.0.1");
                         servo.sin_port = htons(sfds[i].port + MAX + 1);
                         int roo = connect(sockfoo, (struct sockaddr*)&servo, sizeof(servo));
-
+                        printf("Connected to service\n");
                         pthread_t t;
                         struct threadargs *args = (struct threadargs*) malloc(sizeof(struct threadargs));
                         args->nsfd = nsfd;
