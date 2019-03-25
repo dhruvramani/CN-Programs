@@ -72,7 +72,7 @@ int main()
         printf("Enter Port\n");
         scanf("%d", &port);
         printf("Enter Path\n");
-        read(0, path, sizeof(path));
+        scanf("%s", path);
         
         int sfd = socket(AF_INET, SOCK_STREAM, 0);
         struct sockaddr_in addr;
