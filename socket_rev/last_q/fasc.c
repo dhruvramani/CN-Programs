@@ -97,10 +97,11 @@ int main()
         service.sfd = sfd;
         service.port = port;
         strcpy(service.path, path);
-        printf("Hi\n");
-        return;
         sfds[i] = service;
     }
+
+    printf("Hi\n");
+    return;
 
     fd_set rset;
     struct timeval tv;
